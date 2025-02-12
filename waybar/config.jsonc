@@ -2,23 +2,23 @@
 	"layer": "top", // Waybar at top layer
 	"position": "top", // Waybar position (top|bottom|left|right)
 	"height": 30, // Waybar height (to be removed for auto height)
-	// "width": 2560, // Waybar width
+	 "width": 1910, // Waybar width
 	// "spacing": 4, // Gaps between modules (4px)
 	// Choose the order of the modules
-	"modules-left": ["hyprland/workspaces", "tray", "sway/mode","custom/music"],
+	"modules-left": ["hyprland/workspaces", "tray", "custom/music"],
 	"modules-center": ["hyprland/window"],
-	"modules-right": [ "idle_inhibitor", "temperature", "cpu", "memory", "network", "pulseaudio", "clock","battery","battery#bat2","custom/power"],
+	"modules-right": [  "temperature",  "network", "pulseaudio", "clock","battery","custom/power"],
 	// Modules configuration
 	"hyprland/workspaces": {
 		"disable-scroll": true,
 		"all-outputs": true,
 		"format": "{name}",
 		"format-icons": {
-			"1": "",
-			"2": "",
-			"3": "",
-			"4": "",
-			"5": "",
+			"1": " ",
+			"2": "",
+			"3": "󰨜 ",
+			"4": " ",
+			"5": " ",
 			//         "urgent": "",
 			//         "focused": "",
 			//         "default": ""
@@ -28,7 +28,7 @@
 			"2": [],
 			"3": [],
 			"4": [],
-			"5":[]
+			"5": []
 		},
 	},
 	"keyboard-state": {
@@ -96,8 +96,19 @@
 
 	"clock": {
 		"timezone": "Asia/Kolkata",
-		"format": "{:%R }",
-		"tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
+		"format": "{:%I:%M %p}",
+		//"rotate": 0,
+		//"format-alt": "{%d·%m·%y} ",
+		"tooltip-format": "<span>{calendar}</span>",
+		"calendar": {
+			"mode": "month",
+			"format": {
+				"months": "<span color='#c32b2b'><b>{}</b></span>",
+				"days": "<span color='#cdd6f4'><b>{}</b></span>",
+				"weekdays": "<span color='#32cb32'><b>{}</b></span>",
+				"today": "<span  color='yellow'><b>{}</b></span>"
+            	}
+            }
 	},
 
 	"cpu": {
@@ -125,12 +136,12 @@
 	},
 	"battery": {
 		"states": {
-			// "good": 95,
+			"good": 95,
 			"warning": 30,
-			"critical": 15
+			"critical": 20
 		},
 		// "adapter": "/sys/class/power_supply/hid-dc:2c:26:26:48:e8-battery",
-		"format": "{capacity}% {icon}",
+		"format": "{capacity}% {icon} ",
 		"format-charging": "{capacity}% ",
 		"format-plugged": "{capacity}% ",
 		"format-alt": "{time} {icon}",
@@ -142,13 +153,21 @@
 		"bat": "BAT2"
 	},
 	"network": {
-		"interface": "wlp2*", // (Optional) To force the use of this interface
-		"format-wifi": "{essid} ",
-		"format-ethernet": "{ipaddr}/{cidr} 󰈀",
-		"tooltip-format": " ({signalStrength}%) ",
-		"format-linked": "{ifname} (No IP) ",
-		"format-disconnected": "Disconnected ⚠",
-		"on-click":"~/.config/waybar/wifimenu.sh"
+		//"format-wifi": "{essid}  ",
+		//"format-ethernet": "Ethernet 󰈀 ",
+		//"tooltip-format": "{ipaddr}   ({signalStrength}%) ",
+		//"format-linked": "{ifname} (No IP) ",
+		//"format-disconnected": "Disconnected ⚠",
+		//"on-click":"~/.config/waybar/wifimenu.sh"
+
+		"format-wifi": "{essid}   <span> {bandwidthDownBytes}</span>",
+		"tooltip": true,
+		"format-ethernet": "Ethernet 󰈀  <span> {bandwidthDownBytes}</span>",
+        	"tooltip-format": "Network: <big><b>{essid}</b></big>\nSignal strength: <b>{signaldBm}dBm ({signalStrength}%)</b>\nFrequency: <b>{frequency}MHz</b>\nIP: <b>{ipaddr}</b>",
+        	"format-linked": " {ifname} (No IP)",
+		"format-disconnected": "Disconnected 󰖪 ",
+		"on-click":"~/.config/waybar/wifimenu.sh",
+        	"interval": 2
 	},
 	"pulseaudio": {
 		"scroll-step": 5, // %, can be a float
@@ -159,19 +178,18 @@
 		"format-source": "{volume}% ",
 		"format-source-muted": " ",
 		"format-icons": {
-			"headphone": "",
+			"headphone": " ",
 			"hands-free": "",
-			"headset": "󰋋",
-			"phone": "",
-			"portable": "",
-			"car": "",
+			"headset": "󰋋 ",
+			"phone": " ",
+			"portable": " ",
+			"car": " ",
 			"default": ["", "", ""]
 		},
 		"escape": true,
 		"exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null" // Script in resources folder
 		// "exec": "$HOME/.config/waybar/mediaplayer.py --player spotify 2> /dev/null" // Filter player based on name
 	},
-
 	"custom/power": {
 		"format": "󰐥",  // Added label for visibility
 		"on-click": "wlogout",  // Command to logout or shutdown
@@ -179,8 +197,15 @@
 	},
 	"custom/music": {
 		"exec": "~/.config/waybar/mediaplayer.sh",
-		"interval": 3,  // Refresh every 5 seconds
+		"interval": 20,  // Refresh every 30  seconds
 		"on-click": "playerctl play-pause",
-		"return-type": "json"
+		"return-type": "json",
+		"tooltip":true,
+		"tooltip-format":"music"
 	},
+	"image#album-art":{
+		"exec": "~/.config/waybar/image.sh",
+		"size": 35,
+		"interval": 20,  // Refresh every 30  seconds
+	}
 }

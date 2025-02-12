@@ -1,4 +1,5 @@
 
+
 #!/bin/bash
 
 # List available Wi-Fi networks (SSID and BARS) using nmcli, ensuring SSIDs with spaces are captured correctly
@@ -25,10 +26,11 @@ fi
 # Connect to the selected network using nmcli
 nmcli device wifi connect "$selected_network" password "$wifi_password"
 
+
 # Check if the connection was successful
 if [ $? -eq 0 ]; then
-    notify-send "Connected" "Successfully connected to $selected_network"
+    notify-send -t 3000 "Connected" "Successfully connected to $selected_network"
 else
-    notify-send "Failed" "Failed to connect to $selected_network"
+    notify-send -t 3000 "Failed" "Failed to connect to $selected_network"
 fi
 

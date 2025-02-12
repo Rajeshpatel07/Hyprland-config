@@ -1,7 +1,7 @@
-* { 
+* {
     all: unset;
     border: none;
-    border-radius: 5px;
+    /*border-radius: 5px;*/
     font-family: JetBrains Mono;
     font-size: 13px;
     min-height: 0;
@@ -13,7 +13,6 @@ window#waybar {
     color: @theme_text_color;
     transition-property: background-color;
     transition-duration: .5s;
-    border-radius: 0;
 }
 
 window#waybar.hidden {
@@ -21,12 +20,12 @@ window#waybar.hidden {
 }
 
 tooltip {
-  background: rgba(43, 48, 59, 0.5);
-  border: 1px solid rgba(100, 114, 125, 0.5);
+    background: rgba(43, 48, 59, 0.5);
+    border: 1px solid rgba(100, 114, 125, 0.5);
 }
 
 tooltip label {
-  color: white;
+    color: white;
 }
 
 /*
@@ -52,7 +51,7 @@ window#waybar.solo {
     box-shadow: inset 0 -3px #ffffff;
 }
 
-#workspaces button.active{
+#workspaces button.active {
     background: rgba(0, 0, 0, 0.4);
     box-shadow: inset 0 -3px #f8f8f2;
 }
@@ -85,13 +84,14 @@ window#waybar.solo {
 #tray,
 #mode,
 #idle_inhibitor,
+#custom-music,
 #custom-notification,
 #sway-scratchpad,
 #mpd {
     padding: 0 10px;
-    margin: 6px 3px;
+    margin: 3px 5px;
     color: #f8f8f2;
-    font-weight:600;
+    font-weight: 600;
 }
 
 #window,
@@ -99,38 +99,47 @@ window#waybar.solo {
     margin: 0 0px;
 }
 
-#window{
-    color:white;
+#window {
+    color: white;
 }
 
 /* If workspaces is the leftmost module, omit left margin */
-.modules-left > widget:first-child > #workspaces {
+.modules-left>widget:first-child>#workspaces {
     margin-left: 5px;
 }
 
 /* If workspaces is the rightmost module, omit right margin */
-.modules-right > widget:last-child > #workspaces {
+.modules-right>widget:last-child>#workspaces {
     margin-right: 0;
 }
 
 #clock {
-    background-color: yellow;
-    color: black;
+    /*background-color: yellow;*/
+    /*color: black;*/
+    border-bottom: solid 1px yellow;
+    color: yellow;
 }
 
-#custom-power{
-    background-color: #ff5555;
-    color: #282a36;
+#custom-power {
+    /*background-color: #ff5555;*/
+    /*color: #282a36;*/
+    border-bottom: solid 1px #ff5555;
+    color: red;
 }
 
 #battery {
-    background-color: #44475a;
-    color: #f8f8f2;
+    /*background-color: #44475a;*/
+    /*color: #f8f8f2;*/
+    border-bottom: solid 1px white;
+    color: white;
 }
 
-#battery.charging, #battery.plugged {
-    color: #ffffff;
-    background-color: #26A65B;
+#battery.charging,
+#battery.plugged {
+    /*color: #ffffff;*/
+    /*background-color: #26A65B;*/
+    border-bottom: solid 1px #26A65B;
+    color: #26A65B;
 }
 
 @keyframes blink {
@@ -169,23 +178,31 @@ label:focus {
 }
 
 #network {
-    background-color: #50fa7b;
-    color: #282a36;
+    /*background-color: #50fa7b;*/
+    /*color: #282a36;*/
+    border-bottom: solid 1px #50fa7b;
+    color: #50fa7b;
 }
 
 #network.disconnected {
-    background-color: #50fa7b;
-    color: #282a36;
+    /*background-color: #50fa7b;*/
+    /*color: #282a36;*/
+    border-bottom: solid 1px #50fa7b;
+    color: #50fa7b;
 }
 
 #pulseaudio {
-    background-color: #bd93f9;
-    color: #282a36;
+    /*background-color: #bd93f9;*/
+    /*color: #282a36;*/
+    border-bottom: solid 1px #bd93f9;
+    color: #bd93f9;
 }
 
 #pulseaudio.muted {
-    background-color: #44475a;
-    color: #f8f8f2;
+    /*background-color: #44475a;*/
+    /*color: #f8f8f2;*/
+    border-bottom: solid 1px #44475a;
+    color: #44475a;
 }
 
 #custom-media.custom-spotify {
@@ -197,8 +214,10 @@ label:focus {
 }
 
 #temperature {
-    background-color: #ff79c6;
-    color: #282a36;
+    /*background-color: #ff79c6;*/
+    /*color: #282a36;*/
+    border-bottom: solid 1px #ff79c6;
+    color: #ff79c6;
 }
 
 #temperature.critical {
@@ -210,18 +229,20 @@ label:focus {
     background-color: #bd93f9
 }
 
-#tray > .passive {
+#tray>.passive {
     -gtk-icon-effect: dim;
 }
 
-#tray > .needs-attention {
+#tray>.needs-attention {
     -gtk-icon-effect: highlight;
     background-color: #eb4d4b;
 }
 
 #idle_inhibitor {
-    background-color: #44475a;
-    color: #f8f8f2;
+    /*background-color: #44475a;*/
+    /*color: #f8f8f2;*/
+    border-bottom: solid 1px #44475a;
+    color: white;
 }
 
 #idle_inhibitor.activated {
@@ -262,11 +283,11 @@ label:focus {
     min-width: 16px;
 }
 
-#keyboard-state > label {
+#keyboard-state>label {
     padding: 0 5px;
 }
 
-#keyboard-state > label.locked {
+#keyboard-state>label.locked {
     background: rgba(0, 0, 0, 0.2);
 }
 
@@ -287,14 +308,7 @@ label:focus {
 }
 
 #custom-music {
-    color: #f8f8f2;
-    padding: 0px 10px;
-    margin-left: 5px;
+    color: #FFCC80;
+    border-bottom: solid 1px #FFCC80;
+    background-image: url("~/Downloads/Wallpaper-Bank/wallpapers/astronaut.jpg");
 }
-
-#custom-music:hover{
-    background: rgba(0, 0, 0, 0.4);
-    box-shadow: inset 0 -3px #f8f8f2;
-}
-
-
