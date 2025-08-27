@@ -2,6 +2,17 @@
 
 - This is my personal configuration for Hyprland.
 
+# Application used
+
+## Tools on waybar
+- blueman-manager --> bluetooth
+- wiremix --> media I/O
+- gnome-calender --> calender
+- playerctl --> media handling
+- wlogout --> power menu
+
+- checkout [keybinds](./keybinds.md)
+
 ## Screenshots
 
 ### Home screen

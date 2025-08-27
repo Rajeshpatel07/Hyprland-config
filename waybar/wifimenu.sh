@@ -1,9 +1,8 @@
 
-
 #!/bin/bash
 
 # List available Wi-Fi networks (SSID and BARS) using nmcli, ensuring SSIDs with spaces are captured correctly
-networks=$(nmcli -t -f SSID,BARS device wifi list | grep -v '^--' | uniq)
+networks=$(nmcli -t -f SSID,BARS device wifi list --rescan yes| grep -v '^--' | uniq)
 
 # Use Wofi to display networks and allow selection
 selected_network=$(echo "$networks" | wofi --dmenu --prompt "Select a Wi-Fi Network:" | cut -d ':' -f 1)

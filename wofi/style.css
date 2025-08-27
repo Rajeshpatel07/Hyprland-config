@@ -1,22 +1,22 @@
 * {
   font-family: JetBrainsMono;
   color: #e5e9f0;
-  background: transparent;
+  background:transparent;
 }
 
 #window {
-  background: rgba(13, 21, 58, 0.9);
+  background: black;
   margin: auto;
   padding: 10px;
-  border-radius: 20px;
-  border: solid 3px rgba(13,21,58,1);
+  border:solid 1px black;
+  border-radius: 8px;
 }
 
 #input {
   padding: 10px;
-  margin-bottom: 10px;
-  border-radius: 15px;
-  border:solid 1px grey;
+  margin-bottom: 20px;
+  border:none;
+  border-bottom:solid gray 1px;
 }
 
 #outer-box {
@@ -28,14 +28,13 @@
 }
 
 #entry {
-  padding: 10px;
-  border-radius: 15px;
-  border-bottom:solid 1px white;
+  padding: 5px;
 }
 
 #entry:selected {
-  border-radius: 15px;
-  padding: 10px;
+  border-radius: 5px;
+  border:solid 1px white;
+  padding: 5px;
   background: rgba(20, 1, 244,0);
   background: linear-gradient(45deg, rgba(20, 1, 244, 0.5), rgba(245, 46, 38, 0.5));
 }

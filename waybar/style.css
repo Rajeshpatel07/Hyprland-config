@@ -1,7 +1,6 @@
 * {
     all: unset;
     border: none;
-    /*border-radius: 5px;*/
     font-family: JetBrains Mono;
     font-size: 13px;
     min-height: 0;
@@ -87,6 +86,7 @@ window#waybar.solo {
 #custom-music,
 #custom-notification,
 #sway-scratchpad,
+#bluetooth,
 #mpd {
     padding: 0 10px;
     margin: 3px 5px;
@@ -114,10 +114,13 @@ window#waybar.solo {
 }
 
 #clock {
-    /*background-color: yellow;*/
-    /*color: black;*/
     border-bottom: solid 1px yellow;
     color: yellow;
+}
+
+#bluetooth{
+	border-bottom:solid 1px #41A2B0;
+	color:#41A2B0;
 }
 
 #custom-power {
