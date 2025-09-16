@@ -2,6 +2,12 @@
 
 - This is my personal configuration for Hyprland.
 
+# Installation
+
+```bash
+bash ./install.sh
+```
+
 # Application used
 
 ## Tools on waybar
@@ -12,6 +18,7 @@
 - wlogout --> power menu
 
 - checkout [keybinds](./keybinds.md)
+
 
 ## Screenshots
 
