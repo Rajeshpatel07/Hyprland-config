@@ -1,11 +1,7 @@
-
 #!/bin/bash
 
 # Path to the folder containing wallpapers
-WALLPAPER_DIR="$HOME/Downloads/Wallpaper-Bank/wallpapers"
-
-# Path to Hyprpaper config file
-CONFIG_FILE="$HOME/.config/hypr/hyprpaper.conf"
+WALLPAPER_DIR="$HOME/Pictures/wallpapers"
 
 # Ensure the wallpaper directory exists
 if [ ! -d "$WALLPAPER_DIR" ]; then
@@ -13,14 +9,15 @@ if [ ! -d "$WALLPAPER_DIR" ]; then
     exit 1
 fi
 
-# Ensure the config file exists
-if [ ! -f "$CONFIG_FILE" ]; then
-    echo "Hyprpaper config file not found: $CONFIG_FILE"
-    exit 1
+# Select a random image from the folder (excluding the current one if possible to avoid no-change)
+CURRENT_WALL=$(hyprctl hyprpaper listactive | awk '{print $NF}' | head -n1 | xargs basename 2>/dev/null || echo "")
+if [ -n "$CURRENT_WALL" ]; then
+    RANDOM_IMAGE=$(find "$WALLPAPER_DIR" -type f \( -name "*.png" -o -name "*.jpg" -o -name "*.jpeg" \) ! -name "$CURRENT_WALL" | shuf -n 1)
 fi
-
-# Select a random image from the folder
-RANDOM_IMAGE=$(find "$WALLPAPER_DIR" -type f \( -name "*.png" -o -name "*.jpg" -o -name "*.jpeg" \) | shuf -n 1)
+# Fallback if no exclusion or empty
+if [ -z "$RANDOM_IMAGE" ]; then
+    RANDOM_IMAGE=$(find "$WALLPAPER_DIR" -type f \( -name "*.png" -o -name "*.jpg" -o -name "*.jpeg" \) | shuf -n 1)
+fi
 
 # Check if a random image was found
 if [ -z "$RANDOM_IMAGE" ]; then
@@ -28,14 +25,15 @@ if [ -z "$RANDOM_IMAGE" ]; then
     exit 1
 fi
 
-# Update the Hyprpaper configuration
-sed -i "s|^preload = .*|preload = $RANDOM_IMAGE|" "$CONFIG_FILE"
-sed -i "s|^wallpaper = ,.*|wallpaper = ,$RANDOM_IMAGE|" "$CONFIG_FILE"
+# Ensure hyprpaper is running (start if not)
+if ! pgrep -x hyprpaper > /dev/null; then
+    hyprpaper &
+    sleep 0.5  # Brief wait for startup
+fi
+
+# Preload and set the wallpaper dynamically via hyprctl (applies to all monitors; unloads old automatically)
+hyprctl hyprpaper preload "$RANDOM_IMAGE"
+hyprctl hyprpaper wallpaper ,"$RANDOM_IMAGE"
 
 # Print success message
 echo "Wallpaper updated to: $RANDOM_IMAGE"
-
-# Reload Hyprland (optional if needed to apply changes immediately)
-killall hyprpaper
-
-hyprpaper

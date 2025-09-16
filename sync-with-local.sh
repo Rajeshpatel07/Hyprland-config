@@ -1,36 +1,39 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-# List of folders to swap (without trailing slashes)
+# List of folders to copy from ~/.config
 folders=("hypr" "waybar" "rofi" "mako" "kitty")
 
-# Enable dotglob to include hidden files in *
+# Enable dotglob to include hidden files (like .git) in the copy.
+# nullglob prevents errors if a source directory is empty.
 shopt -s dotglob nullglob
 
+echo "Starting configuration copy process..."
+echo "-------------------------------------"
+
 for folder in "${folders[@]}"; do
-    config_dir="$HOME/.config/$folder"
-    cwd_dir="./$folder"
-    temp_dir=$(mktemp -d "/tmp/swap_${folder}_XXXXXX")
+    # Define the source and destination directories
+    source_dir="$HOME/.config/$folder"
+    dest_dir="./$folder"
 
-    # Create directories if they don't exist
-    mkdir -p "$config_dir"
-    mkdir -p "$cwd_dir"
-    mkdir -p "$temp_dir"
+    # Check if the source directory exists and is not empty
+    if [ -d "$source_dir" ] && [ "$(ls -A "$source_dir")" ]; then
+        # Ensure the destination directory exists
+        mkdir -p "$dest_dir"
 
-    # Swap contents using temp:
-    # Move config_dir contents to temp
-    mv "$config_dir"/* "$temp_dir"/ 2>/dev/null || true
+        # Copy all contents from source to destination.
+        # The -a flag (archive mode) is recursive, preserves file attributes, and is perfect for this.
+        cp -a "$source_dir"/* "$dest_dir"/
 
-    # Move cwd_dir contents to config_dir
-    mv "$cwd_dir"/* "$config_dir"/ 2>/dev/null || true
-
-    # Move temp contents to cwd_dir
-    mv "$temp_dir"/* "$cwd_dir"/ 2>/dev/null || true
-
-    # Clean up temp
-    rmdir "$temp_dir" 2>/dev/null || true
+        # Log a success message
+        echo "✅ Copied: '$source_dir' -> '$dest_dir'"
+    else
+        # Log a warning if the source directory doesn't exist or is empty
+        echo "⚠️  Skipped: '$source_dir' (not found or is empty)."
+    fi
 done
 
-# Reset shopt if needed (though script ends here)
+# Reset shell options for good practice
 shopt -u dotglob nullglob
 
-echo "Swapped contents of the specified folders between ~/.config and the current working directory."
+echo "-------------------------------------"
+echo "Configuration copy process finished."

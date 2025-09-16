@@ -5,7 +5,7 @@
   // "width": 1910, // Waybar width
   // "spacing": 4, // Gaps between modules (4px)
   // Choose the order of the modules
-  "modules-left": ["hyprland/workspaces", "tray", "custom/music"],
+  "modules-left": ["hyprland/workspaces", "tray", "mpris"],
   "modules-center": ["hyprland/window"],
   "modules-right": [
     "temperature",
@@ -197,18 +197,20 @@
     "on-click": "wlogout", // Command to logout or shutdown
     "tooltip-format": "Power Menu" // Tooltip for additional info
   },
-  "custom/music": {
-    "exec": "~/.config/waybar/mediaplayer.sh",
-    "interval": 20, // Refresh every 30  seconds
+  "mpris": {
+    "format": "{player_icon}  {title}",
+    "format-stopped": "",
+    "title-len":40,
     "on-click": "playerctl play-pause",
-    "return-type": "json",
-    "tooltip": true,
-    "tooltip-format": "music"
-  },
-  "image#album-art": {
-    "exec": "~/.config/waybar/image.sh",
-    "size": 35,
-    "interval": 20 // Refresh every 30  seconds
+    "on-click-right": "playerctl next",
+    "player-icons": {
+      "default": "",
+      "spotify": "",
+      "brave": "",
+      "firefox": "",
+      "zen":""
+    }
   }
+}
 }
 
