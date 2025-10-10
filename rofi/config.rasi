@@ -18,8 +18,9 @@ window {
   width: 38%;
   height:37%;
   padding: 10px;
-  border-color: rgba(33, 204, 254, 1);
-  border:2px;
+  border-color: #28C7E0;
+  border:0.08em;
+  border-radius:1px;
   background-color: #000000;
 }
 
@@ -88,8 +89,8 @@ element-text {
 /* Selected item with gradient */
 element selected {
   text-color: #ffffff;
-  border-radius: 6px;
-  border-color:rgba(33, 204, 254, 1);
+  border-radius: 1px;
+  border-color: #28C7E0;
   border:1px;
 }
 

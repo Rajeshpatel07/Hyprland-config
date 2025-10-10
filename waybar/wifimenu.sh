@@ -31,7 +31,7 @@ if nmcli -g NAME connection show | grep -wq "$SSID"; then
         wifi_password=$(rofi -dmenu -password -p "New Password for $SSID:")
 
         if [ -n "$wifi_password" ]; then
-            nmcli connection modify "$SSID" 802-11-wireless-security.psk "$wifi_password"
+            # nmcli connection modify "$SSID" 802-11-wireless-security.psk "$wifi_password"
 
             nmcli connection up "$SSID" && success=true
         fi
