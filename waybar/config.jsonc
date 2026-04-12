@@ -5,7 +5,7 @@
   // "width": 1910, // Waybar width
   // "spacing": 4, // Gaps between modules (4px)
   // Choose the order of the modules
-  "modules-left": ["hyprland/workspaces", "tray", "mpris"],
+  "modules-left": ["hyprland/workspaces", "tray"],
   "modules-center": ["hyprland/window"],
   "modules-right": [
     "temperature",
@@ -156,7 +156,7 @@
     "bat": "BAT2"
   },
   "network": {
-    "format-wifi": "{essid}   <span> {bandwidthDownBytes}</span>",
+    "format-wifi": "{essid}  ", //<span> {bandwidthDownBytes}</span>
     "tooltip": true,
     "format-ethernet": "Ethernet 󰈀  <span> {bandwidthDownBytes}</span>",
     "tooltip-format": "Network: <big><b>{essid}</b></big>\nSignal strength: <b>{signaldBm}dBm ({signalStrength}%)</b>\nFrequency: <b>{frequency}MHz</b>\nIP: <b>{ipaddr}</b>",
@@ -178,7 +178,8 @@
     "format-muted": " {format_source}",
     "format-source": "{volume}% ",
     "format-source-muted": " ",
-    "on-click": "kitty --class=wiremix -e wiremix",
+    "on-click-right": "kitty --class=wiremix -e wiremix",
+    "on-click": "~/.config/waybar/audio.sh",
     "format-icons": {
       "headphone": " ",
       "hands-free": "",
@@ -186,7 +187,7 @@
       "phone": " ",
       "portable": " ",
       "car": " ",
-      "default": ["", "", ""]
+      "default": ["", "", " "]
     },
     "escape": true
     // "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null" // Script in resources folder
@@ -198,7 +199,7 @@
     "tooltip-format": "Power Menu" // Tooltip for additional info
   },
   "mpris": {
-    "format": "{player_icon}  {title}",
+    "format": "{player_icon} {title}",
     "format-stopped": "",
     "title-len":40,
     "on-click": "playerctl play-pause",
@@ -207,6 +208,7 @@
       "default": "",
       "spotify": "",
       "brave": "",
+      "chromium":" ",
       "firefox": "",
       "zen":""
     }

@@ -1,6 +1,12 @@
-
 #!/bin/bash
 
-killall waybar
+WAYBAR_PROCESS="waybar"
 
-waybar -c ~/.config/waybar/config.jsonc & -s ~/.config/waybar/style.css
+if pgrep -x "$WAYBAR_PROCESS" > /dev/null
+then
+    pkill -x "$WAYBAR_PROCESS"
+    exit 0
+else
+    waybar & disown
+    exit 0
+fi
