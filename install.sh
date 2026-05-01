@@ -33,7 +33,7 @@ log_error() {
 set -e
 
 # List of essential packages for the setup
-packages=("hyprland" "waybar" "rofi" "mako" "kitty" "unzip" "git")
+packages=("hyprland" "hyprlock" "waybar" "rofi" "mako" "kitty" "unzip" "git")
 
 log_info "Starting the setup process..."
 source /etc/os-release
@@ -129,24 +129,6 @@ for folder in "${config_folders[@]}"; do
 done
 
 cp ./tmux/.tmux.conf ~/
-
-# -----------------------------------------------------------------------------
-# WALLPAPER SETUP
-# -----------------------------------------------------------------------------
-
-zip_file="./wallpapers.zip"
-wallpaper_dest_dir="$HOME/Pictures/wallpapers"
-
-log_info "Setting up wallpapers..."
-if [ -f "$zip_file" ]; then
-    log_info "Found ${zip_file}. Unzipping to ${wallpaper_dest_dir}..."
-    mkdir -p "$wallpaper_dest_dir"
-    # Unzip, overwriting existing files without prompting (-o)
-    unzip -o "$zip_file" -d "$wallpaper_dest_dir" >/dev/null 2>&1
-    log_success "Wallpapers have been unzipped successfully."
-else
-    log_warning "${zip_file} not found in the current directory. Skipping wallpaper setup."
-fi
 
 # -----------------------------------------------------------------------------
 # FINALIZATION

@@ -16,6 +16,7 @@ if hyprctl monitors | grep -q "^Monitor $LAPTOP"; then
 else
     # It's off → enable it
     hyprctl keyword monitor "$LAPTOP,preferred,auto,1"
+    hyprctl reload
     # Optional: add a notification
     # notify-send "Laptop screen" "Enabled"
 fi
